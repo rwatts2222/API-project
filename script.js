@@ -21,14 +21,14 @@ fetch(baseURL)
                 
 
                 // create button
-                let moreInfoButton = document.createElement('button');
-                moreInfoButton.className = 'btn btn-dark';
-                moreInfoButton.type = 'button';
-                moreInfoButton.innerHTML = "More Information";
-                let button = document.querySelector('.btn btn-dark')
+                let button = document.createElement('button');
+                button.className = 'btn btn-dark';
+                button.type = 'button';
+                button.innerHTML = "More Information";
+                
                 
                 cardContainer.appendChild(card);
-                cardBody.appendChild(button);
+                cardContainer.appendChild(button);
 
             
                 
