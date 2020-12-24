@@ -1,5 +1,4 @@
 /* General Setup */
-
 html, body {
     margin: 0;
     padding: 0;
@@ -7,23 +6,149 @@ html, body {
 
 body {
     background-color: gray;
+    background: url("assets/background.jpg");
+    background-repeat: round;
 }
 
 /* Body */
-
-.main {
-    height: 100vh;
-    width: 100vw;
-    display: inline-block;
+.main {  
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
 }
 
-#mainHeader {
-    padding: 40px;
+.mainHeader {
+    padding-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
+    font-family: 'Sniglet', cursive;
+    font-size: 3.2em;
+    border-radius: 10px;
+    color: rgb(235, 106, 252);
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
+    width: 10.5em;
+    height: .5em;
 }
 
-.container {
-    text-align: center;
-    display: inline-block;
-} 
+.card {
+    height: 170px;
+    width: auto;
+    border-radius: 5px;
+    margin: 20px;
+    background-color: rgb(255, 255, 255);
+}
 
+.filmName {
+    padding: 10px 0;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+/* More information button */
+.button {
+    border: none;
+    border-radius: 10px;
+    background-color: #29a4d9;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.button:hover {
+    background-color: #2593c2;
+}
+
+/* Modal background appears after click more information button*/
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+  font-family: 'Noto Sans', sans-serif;
+}
+
+/* Modal content box */
+.modalContent {
+  background-color: #fefefe;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 5px solid #888;
+  border-radius: 30px / 150px;
+  height: auto;
+  width: 60%; 
+}
+
+/* Modal X Button */
+.span {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  float: right;
+}
+
+.span:hover,
+.span:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal Table format */
+.modalTable {
+    border-spacing: 15px 1em;
+}
+
+/* Modal Title */
+.modalTitle {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+/* Summary */
+.summaryRow {
+    vertical-align: top;
+    text-align: left;
+}
+
+.summaryHeading {
+    text-align: right;
+    width: 180px;
+}
+
+/* Year */
+.yearHeading {
+    text-align: right;
+}
+
+.year {
+    text-align: left;
+}
+
+/* Director */
+.directorHeading {
+    text-align: right;
+}
+
+.director {
+    text-align: left;
+}
+
+/* Rotten Tomatoes Score */
+.rtHeading {
+    text-align: right;
+}
+
+.rtScore {
+    text-align: left;
+    vertical-align: bottom;
+}

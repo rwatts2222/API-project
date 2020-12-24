@@ -1,96 +1,146 @@
 const baseURL = 'https://ghibliapi.herokuapp.com/films';
 let main = document.querySelector('.main');
-let cardContainer = document.querySelector('.cardContainer');
-let filmInfo;
+let row = document.querySelector('.row');
+let container = document.querySelector('.container');
 
+let info;
 
-fetch(baseURL)
+// Fetch API data
+fetch(`${baseURL}`)
     .then(response => response.json())
-    .then(json => titles(json));
+    .then(json => titleCards(json));
     
-    // Film Titles
-        function titles(json) {
-            filmInfo = json;
+        // Film Titles
+        function titleCards(info) {
+         info = info;
+         console.log(info);
+
+          for (let i = 0; i < 20; i++) {
+            // create card
+            let card = document.createElement('div');
+            card.className = 'card';
+            card.style.width = "18rem";
+                
+            // create title
+            let filmName = document.createElement('h2');
+            filmName.className = 'filmName';
+            filmName.innerText = `${info[i].title}`;
             
-            for (let i = 0; i < 3; i++) {
-                let card = document.createElement('div');
-                card.className = 'card';
-                card.style.width = "18rem";
-                card.innerText = "test";
-                
-                
+            // create button to open modal
+            let button = document.createElement('button');
+            button.className = 'button';
+            button.type = 'button';
+            button.innerHTML = "More Information";
+            button.dataset.toggle = "modal"
+            button.dataset.target = ".modal"
 
-                // create button
-                let button = document.createElement('button');
-                button.className = 'btn btn-dark';
-                button.type = 'button';
-                button.innerHTML = "More Information";
-                
-                
-                cardContainer.appendChild(card);
-                cardContainer.appendChild(button);
+            button.onclick = function() {
+                modal.style.display = "block";
+              }
 
+            // append card, title, and button to main section
+            main.appendChild(card);
+            card.appendChild(filmName);
+            card.appendChild(button);
+
+
+            // create modal
+            let modal = document.createElement('div');
+            modal.className = 'modal';
+            document.getElementsByClassName('modal')
+            main.appendChild(modal);
             
-                
-               
+            let modalContent = document.createElement('div');
+            modalContent.className = 'modalContent';
+            modal.appendChild(modalContent);
 
+            let span = document.createElement('span');
+            span.className = 'span';
+            span.innerText = "\u2715";
+            modalContent.appendChild(span);
 
-                
-                let filmName = document.createElement('h2');
-                filmName.className = 'filmName';
-                filmName.innerText = `${json[i].title}`;
+            // Create table to format modal card
+            let modalTable = document.createElement('table');
+            modalTable.className = 'modalTable';
+            modalContent.appendChild(modalTable);
 
-                card.insertBefore(filmName, cardBody);
+            // Table title
+            let modalTitle = document.createElement('th');
+            modalTitle.className = 'modalTitle';
+            modalTitle.innerText = `${info[i].title}`
+            modalTitle.colSpan = '2';
+            modalTable.appendChild(modalTitle);
 
-            }    
+            // Summary
+            let summaryRow = document.createElement('tr')
+            summaryRow.className = 'summaryRow';
+            modalTable.appendChild(summaryRow);
+
+            let summaryHeading = document.createElement('th');
+            summaryHeading.className = 'summaryHeading';
+            summaryHeading.innerText = "Summary: ";
+            summaryRow.appendChild(summaryHeading);
+
+            let summary = document.createElement('td');
+            summary.className = 'summary';
+            summary.innerText = `${info[i].description}`;
+            summaryRow.appendChild(summary);
+
+            // Year
+            let yearRow = document.createElement('tr')
+            yearRow.className = 'yearRow';
+            modalTable.appendChild(yearRow);
+
+            let yearHeading = document.createElement('th');
+            yearHeading.className = 'yearHeading';
+            yearHeading.innerText = "Year: ";
+            yearRow.appendChild(yearHeading);
+
+            let year = document.createElement('td');
+            year.className = 'year';
+            year.innerText = `${info[i].release_date}`;
+            yearRow.appendChild(year);
             
+            // Director
+            let directorRow = document.createElement('tr');
+            directorRow.className = 'directorRow';
+            modalTable.appendChild(directorRow);
+
+            let directorHeading = document.createElement('th');
+            directorHeading.className = 'directorHeading';
+            directorHeading.innerText = "Director: "
+            directorRow.appendChild(directorHeading);
+
+            let director = document.createElement('td');
+            director.className = 'director';
+            director.innerText = `${info[i].director}`;
+            directorRow.appendChild(director);
+
+            // Rotten Tomatoes Score
+            let rtRow = document.createElement('tr');
+            rtRow.className = 'rtRow';
+            modalTable.appendChild(rtRow);
+
+            let rtHeading = document.createElement('th');
+            rtHeading.className = 'rtHeading';
+            rtHeading.innerText = "Rotten Tomatoes Score:";
+            rtRow.appendChild(rtHeading);
+
+            let rtScore = document.createElement('td');
+            rtScore.className = 'rtScore';
+            rtScore.innerText = `${info[i].rt_score}%`;
+            rtRow.appendChild(rtScore);
             
-            
-        
-    }
 
+            span.onclick = function() {
+                modal.style.display = "none";
+              }
 
-
-
-
-
-
-
-
-    // // Card 2
-    // fetch(`${baseURL}`)
-    // .then(response => response.json())
-    // .then (json => object2(json));
-
-    // function object2(json) {    
-    // let card2 = document.querySelector('.card2');
-    // let cardBody2 = document.querySelector('.card2-body');
-
-    // let film2 = document.createElement('h2');
-    // film2.className = 'film2';
-    // film2.innerText = `${json[1].title}`;
-
-    // card2.insertBefore(film2, cardBody2);
-
-    //     // Film 2 More Information
-    //     function moreInformation(moviePosition) {
-        
-    //         console.log(filmInfo[moviePosition].description)
-    //         // Description
-    //         let description2 = document.createElement('h3');
-    //         description2.className = 'description2';
-    //         description2.innerText = `${filmInfo[moviePosition].description}`;      
-    //         }
-        
-    //         button2.addEventListener('click', () => {
-    //             moreInformation(1);       
-                
-    //         });
-    // }
-
-
-
-
-
-
-
+            // Close modal if clicked outside
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+          }
+        }
