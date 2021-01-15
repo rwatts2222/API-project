@@ -47,6 +47,7 @@ fetch(`${baseURL}`)
             // create modal
             let modal = document.createElement('div');
             modal.className = 'modal';
+            modal.id = `modal-${i}`;
             document.getElementsByClassName('modal')
             main.appendChild(modal);
             
@@ -132,14 +133,16 @@ fetch(`${baseURL}`)
             rtRow.appendChild(rtScore);
             
 
-            span.onclick = function() {
+              span.onclick = closeModal;
+              function closeModal() {
                 modal.style.display = "none";
               }
 
             // Close modal if clicked outside
             window.onclick = function(event) {
-              if (event.target == modal) {
-                modal.style.display = "none";
+              if (event.target.classList[0] === 'modal') {
+                closeModal();
+                document.getElementById(`${event.target.id}`).style.display = "none"
               }
             }
           }
